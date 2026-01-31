@@ -1,0 +1,96 @@
+# ===========================
+# IDE
+# ===========================
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+
+# ===========================
+# OS
+# ===========================
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# ===========================
+# Backend (Java/Maven/Spring Boot)
+# ===========================
+backend/target/
+backend/*.jar
+backend/*.war
+backend/*.ear
+backend/.mvn/
+backend/mvnw
+backend/mvnw.cmd
+backend/HELP.md
+
+# ===========================
+# Frontend (Node/React)
+# ===========================
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.next/
+frontend/out/
+frontend/.cache/
+frontend/.vite/
+frontend/.turbo/
+frontend/coverage/
+frontend/*.tsbuildinfo
+
+# ===========================
+# Environment Variables
+# ===========================
+.env
+.env.local
+.env.*.local
+.env.development.local
+.env.test.local
+.env.production.local
+backend/src/main/resources/application-local.properties
+backend/src/main/resources/application-local.yml
+
+# ===========================
+# Logs
+# ===========================
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ===========================
+# Temporary Files
+# ===========================
+*.tmp
+*.temp
+tmp/
+temp/
+
+# ===========================
+# Package Manager
+# ===========================
+.pnpm-store/
+.yarn/
+.pnp.*
+
+# ===========================
+# Database
+# ===========================
+*.db
+*.sqlite
+*.sqlite3
+
+# ===========================
+# Testing
+# ===========================
+.nyc_output/
+.coverage/

@@ -1,0 +1,299 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    
+    --primary: 160 84% 39%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --success: 160 84% 39%;
+    --success-foreground: 0 0% 100%;
+    
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 0%;
+    
+    --info: 199 89% 48%;
+    --info-foreground: 0 0% 100%;
+    
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 160 84% 39%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 240 5.9% 97%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 160 84% 39%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 240 5.9% 90%;
+    --sidebar-ring: 160 84% 39%;
+
+    --surface-1: 0 0% 100%;
+    --surface-2: 240 4.8% 97%;
+    --surface-3: 240 4.8% 95%;
+
+    --diff-added: 142 76% 36%;
+    --diff-added-bg: 142 76% 94%;
+    --diff-removed: 0 84% 60%;
+    --diff-removed-bg: 0 84% 94%;
+    --diff-unchanged: 240 5% 96%;
+
+    --status-ok: 160 84% 39%;
+    --status-error: 0 84% 60%;
+    --status-warning: 38 92% 50%;
+    --status-running: 199 89% 48%;
+    --status-disabled: 240 4% 46%;
+  }
+
+  .dark {
+    --background: 240 10% 4%;
+    --foreground: 0 0% 95%;
+    
+    --card: 240 10% 6%;
+    --card-foreground: 0 0% 95%;
+    
+    --popover: 240 10% 6%;
+    --popover-foreground: 0 0% 95%;
+    
+    --primary: 160 84% 45%;
+    --primary-foreground: 0 0% 0%;
+    
+    --secondary: 240 4% 16%;
+    --secondary-foreground: 0 0% 95%;
+    
+    --muted: 240 4% 16%;
+    --muted-foreground: 240 5% 65%;
+    
+    --accent: 240 4% 16%;
+    --accent-foreground: 0 0% 95%;
+    
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --success: 160 84% 45%;
+    --success-foreground: 0 0% 0%;
+    
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 0%;
+    
+    --info: 199 89% 55%;
+    --info-foreground: 0 0% 0%;
+    
+    --border: 240 4% 16%;
+    --input: 240 4% 16%;
+    --ring: 160 84% 45%;
+
+    --sidebar-background: 240 10% 5%;
+    --sidebar-foreground: 240 5% 65%;
+    --sidebar-primary: 160 84% 45%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 240 4% 14%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 240 4% 14%;
+    --sidebar-ring: 160 84% 45%;
+
+    --surface-1: 240 10% 6%;
+    --surface-2: 240 10% 8%;
+    --surface-3: 240 10% 10%;
+
+    --diff-added: 142 76% 45%;
+    --diff-added-bg: 142 40% 12%;
+    --diff-removed: 0 70% 55%;
+    --diff-removed-bg: 0 40% 12%;
+    --diff-unchanged: 240 4% 12%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  html * {
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html,
+    html * {
+      transition: none !important;
+    }
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/20 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/30;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-info bg-clip-text text-transparent;
+  }
+
+  .glass {
+    @apply bg-background/80 backdrop-blur-xl border border-border/50;
+  }
+  
+  .glass-card {
+    @apply bg-card/90 backdrop-blur-md border border-border/50 shadow-lg;
+  }
+
+  .glow-primary {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+  }
+  
+  .glow-success {
+    box-shadow: 0 0 12px hsl(var(--success) / 0.4);
+  }
+  
+  .glow-error {
+    box-shadow: 0 0 12px hsl(var(--destructive) / 0.4);
+  }
+
+  .surface-1 {
+    @apply bg-[hsl(var(--surface-1))];
+  }
+  
+  .surface-2 {
+    @apply bg-[hsl(var(--surface-2))];
+  }
+  
+  .surface-3 {
+    @apply bg-[hsl(var(--surface-3))];
+  }
+
+  .status-ok {
+    @apply text-[hsl(var(--status-ok))];
+  }
+  
+  .status-error {
+    @apply text-[hsl(var(--status-error))];
+  }
+  
+  .status-warning {
+    @apply text-[hsl(var(--status-warning))];
+  }
+  
+  .status-running {
+    @apply text-[hsl(var(--status-running))];
+  }
+  
+  .status-disabled {
+    @apply text-[hsl(var(--status-disabled))];
+  }
+
+  .diff-added {
+    @apply bg-[hsl(var(--diff-added-bg))] text-[hsl(var(--diff-added))];
+  }
+  
+  .diff-removed {
+    @apply bg-[hsl(var(--diff-removed-bg))] text-[hsl(var(--diff-removed))];
+  }
+  
+  .diff-unchanged {
+    @apply bg-[hsl(var(--diff-unchanged))];
+  }
+
+  .animate-in-fast {
+    animation-duration: 150ms;
+  }
+  
+  .animate-in-slow {
+    animation-duration: 300ms;
+  }
+
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+
+  .shimmer {
+    @apply relative overflow-hidden;
+  }
+  
+  .shimmer::after {
+    content: '';
+    @apply absolute inset-0 -translate-x-full;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      hsl(var(--foreground) / 0.04),
+      transparent
+    );
+    animation: shimmer 2s infinite;
+  }
+  
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .pulse-dot {
+    @apply relative;
+  }
+  
+  .pulse-dot::after {
+    content: '';
+    @apply absolute inset-0 rounded-full animate-ping opacity-75;
+    background: inherit;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

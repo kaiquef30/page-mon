@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="false">
+
+  <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+
+  <springProperty scope="context" name="springAppName" source="spring.application.name" defaultValue="page-change-monitor"/>
+  <property name="LOG_LEVEL_PATTERN" value="%5p [${springAppName:-},%X{traceId:-},%X{spanId:-}]"/>
+
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN} %logger{36} [%X{requestId:-}] [%X{targetId:-}] - %msg%n</pattern>
+      <charset>UTF-8</charset>
+    </encoder>
+  </appender>
+
+  <appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+      <customFields>{"app":"${springAppName}"}</customFields>
+
+      <includeMdcKeyNames>
+        <includeMdcKeyName>requestId</includeMdcKeyName>
+        <includeMdcKeyName>traceId</includeMdcKeyName>
+        <includeMdcKeyName>userId</includeMdcKeyName>
+        <includeMdcKeyName>targetId</includeMdcKeyName>
+        <includeMdcKeyName>changeId</includeMdcKeyName>
+        <includeMdcKeyName>snapshotId</includeMdcKeyName>
+        <includeMdcKeyName>operation</includeMdcKeyName>
+        <includeMdcKeyName>component</includeMdcKeyName>
+        <includeMdcKeyName>threadName</includeMdcKeyName>
+        <includeMdcKeyName>schedulerExecutionId</includeMdcKeyName>
+        <includeMdcKeyName>batchId</includeMdcKeyName>
+        <includeMdcKeyName>fetchMode</includeMdcKeyName>
+        <includeMdcKeyName>url</includeMdcKeyName>
+        <includeMdcKeyName>httpMethod</includeMdcKeyName>
+        <includeMdcKeyName>httpStatus</includeMdcKeyName>
+        <includeMdcKeyName>durationMs</includeMdcKeyName>
+        <includeMdcKeyName>errorType</includeMdcKeyName>
+        <includeMdcKeyName>notifierType</includeMdcKeyName>
+      </includeMdcKeyNames>
+
+      <includeCallerData>false</includeCallerData>
+
+      <includeContext>true</includeContext>
+
+      <provider class="net.logstash.logback.composite.loggingevent.ArgumentsJsonProvider">
+        <includeStructuredArguments>true</includeStructuredArguments>
+        <includeNonStructuredArguments>false</includeNonStructuredArguments>
+      </provider>
+
+      <provider class="net.logstash.logback.composite.loggingevent.StackTraceJsonProvider">
+        <throwableConverter class="net.logstash.logback.stacktrace.ShortenedThrowableConverter">
+          <maxDepthPerThrowable>30</maxDepthPerThrowable>
+          <maxLength>2048</maxLength>
+          <shortenedClassNameLength>20</shortenedClassNameLength>
+          <exclude>^sun\.reflect\..*\.invoke</exclude>
+          <exclude>^net\.sf\.cglib\.proxy\.MethodProxy\.invoke</exclude>
+          <rootCauseFirst>true</rootCauseFirst>
+        </throwableConverter>
+      </provider>
+
+      <timestampPattern>yyyy-MM-dd'T'HH:mm:ss.SSSXXX</timestampPattern>
+      <timeZone>UTC</timeZone>
+    </encoder>
+  </appender>
+
+  <appender name="JSON_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>logs/application.json</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>logs/application-%d{yyyy-MM-dd}.json.gz</fileNamePattern>
+      <maxHistory>30</maxHistory>
+      <totalSizeCap>1GB</totalSizeCap>
+    </rollingPolicy>
+    <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+      <customFields>{"app":"${springAppName}"}</customFields>
+      <includeMdcKeyNames>
+        <includeMdcKeyName>requestId</includeMdcKeyName>
+        <includeMdcKeyName>traceId</includeMdcKeyName>
+        <includeMdcKeyName>userId</includeMdcKeyName>
+        <includeMdcKeyName>targetId</includeMdcKeyName>
+        <includeMdcKeyName>changeId</includeMdcKeyName>
+        <includeMdcKeyName>snapshotId</includeMdcKeyName>
+        <includeMdcKeyName>operation</includeMdcKeyName>
+        <includeMdcKeyName>component</includeMdcKeyName>
+        <includeMdcKeyName>threadName</includeMdcKeyName>
+        <includeMdcKeyName>schedulerExecutionId</includeMdcKeyName>
+        <includeMdcKeyName>batchId</includeMdcKeyName>
+        <includeMdcKeyName>fetchMode</includeMdcKeyName>
+        <includeMdcKeyName>url</includeMdcKeyName>
+        <includeMdcKeyName>httpMethod</includeMdcKeyName>
+        <includeMdcKeyName>httpStatus</includeMdcKeyName>
+        <includeMdcKeyName>durationMs</includeMdcKeyName>
+        <includeMdcKeyName>errorType</includeMdcKeyName>
+        <includeMdcKeyName>notifierType</includeMdcKeyName>
+      </includeMdcKeyNames>
+      <provider class="net.logstash.logback.composite.loggingevent.ArgumentsJsonProvider">
+        <includeStructuredArguments>true</includeStructuredArguments>
+        <includeNonStructuredArguments>false</includeNonStructuredArguments>
+      </provider>
+      <timestampPattern>yyyy-MM-dd'T'HH:mm:ss.SSSXXX</timestampPattern>
+      <timeZone>UTC</timeZone>
+    </encoder>
+  </appender>
+
+  <springProfile name="dev,default">
+    <root level="INFO">
+      <appender-ref ref="CONSOLE" />
+    </root>
+
+    <logger name="io.github.pagemon" level="DEBUG" />
+  </springProfile>
+
+  <springProfile name="prod,production">
+    <root level="INFO">
+      <appender-ref ref="JSON" />
+      <appender-ref ref="JSON_FILE" />
+    </root>
+  </springProfile>
+
+  <springProfile name="json">
+    <root level="INFO">
+      <appender-ref ref="JSON" />
+    </root>
+    <logger name="io.github.pagemon" level="DEBUG" />
+  </springProfile>
+
+  <logger name="org.springframework.web" level="WARN" />
+  <logger name="org.springframework.boot" level="WARN" />
+  <logger name="org.hibernate" level="WARN" />
+  <logger name="org.flywaydb" level="INFO" />
+  <logger name="com.zaxxer.hikari" level="WARN" />
+  <logger name="org.redisson" level="INFO" />
+
+  <logger name="io.github.pagemon.infrastructure.notify.LoggingNotifier" level="INFO" />
+
+  <logger name="io.github.pagemon.application.usecases" level="INFO" />
+  <logger name="io.github.pagemon.interfaces.scheduler" level="INFO" />
+
+</configuration>
