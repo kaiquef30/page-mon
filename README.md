@@ -657,12 +657,12 @@ http://localhost:8080/api/v1
     "cssSelector": ".content",
     "ignoreRegexes": ["\\d{4}-\\d{2}-\\d{2}"],
     "intervalMinutes": 5,
-    "nextRun": "2024-01-29T20:00:00Z",
-    "lastRun": "2024-01-29T19:55:00Z",
+    "nextRun": "2026-01-29T20:00:00Z",
+    "lastRun": "2026-01-29T19:55:00Z",
     "lastStatus": "OK",
     "lastError": null,
-    "createdAt": "2024-01-29T10:00:00Z",
-    "updatedAt": "2024-01-29T19:55:00Z"
+    "createdAt": "2026-01-29T10:00:00Z",
+    "updatedAt": "2026-01-29T19:55:00Z"
   }
 ]
 ```
@@ -756,7 +756,7 @@ http://localhost:8080/api/v1
     "id": "660e8400-e29b-41d4-a716-446655440000",
     "targetId": "550e8400-e29b-41d4-a716-446655440000",
     "targetName": "Example Website",
-    "detectedAt": "2024-01-29T19:55:00Z",
+    "detectedAt": "2026-01-29T19:55:00Z",
     "diff": "@@ -1,3 +1,3 @@\n line1\n-old content\n+new content\n line3",
     "addedLines": 1,
     "deletedLines": 1,
@@ -792,8 +792,8 @@ http://localhost:8080/api/v1
   "id": "770e8400-e29b-41d4-a716-446655440000",
   "webhookUrl": "https://discord.com/api/webhooks/...",
   "enabled": true,
-  "createdAt": "2024-01-29T10:00:00Z",
-  "updatedAt": "2024-01-29T10:00:00Z"
+  "createdAt": "2026-01-29T10:00:00Z",
+  "updatedAt": "2026-01-29T10:00:00Z"
 }
 ```
 </details>
@@ -888,7 +888,7 @@ Logs are structured in JSON format (Logback + Logstash encoder):
 
 ```json
 {
-  "timestamp": "2024-01-29T19:55:00.123Z",
+  "timestamp": "2026-01-29T19:55:00.123Z",
   "level": "INFO",
   "logger": "io.github.pagemon.domain.service.TargetService",
   "message": "Change detected for target: Example Website",
@@ -1327,7 +1327,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 ```
 MIT License
 
-Copyright (c) 2024 Page Change Monitor
+Copyright (c) 2026 Page Change Monitor
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
