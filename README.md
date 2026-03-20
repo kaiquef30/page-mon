@@ -1374,24 +1374,6 @@ This project is built with amazing open-source technologies:
 
 ---
 
-## 📸 Screenshots
-
-### Dashboard Overview
-
-<div align="center">
-  <img src="docs/screenshots/dashboard.jpeg" alt="Dashboard" width="800"/>
-  <p><i>The main dashboard showing monitoring targets, status indicators, and recent changes</i></p>
-</div>
-
-### Interface
-
-<div align="center">
-  <img src="docs/screenshots/interface.jpeg" alt="Interface" width="800"/>
-  <p><i>Application interface with monitoring details</i></p>
-</div>
-
----
-
 <div align="center">
 
 ### 🚀 Ready to start monitoring?
